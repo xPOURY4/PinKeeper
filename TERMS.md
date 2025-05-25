@@ -1,6 +1,6 @@
 # Terms and Conditions for PinKeeper
 
-*Last Updated: October 2023*
+*Last Updated: May 2025*
 
 ## Introduction
 
