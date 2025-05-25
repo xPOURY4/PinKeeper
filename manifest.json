@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "PinKeeper: UnOfficial Pinterest Image Vault",
+  "version": "1.0",
+  "description": "Download and organize high-quality Pinterest images in your personal vault. UnOfficial tool not affiliated with Pinterest.",
+  "permissions": ["activeTab", "downloads", "scripting", "storage"],
+  "host_permissions": ["*://*.pinterest.com/*"],
+  "action": {
+    "default_popup": "src/html/popup.html",
+    "default_title": "PinKeeper: UnOfficial Pinterest Image Vault"
+  },
+  "icons": {
+    "16": "src/assets/icons/icon16.png",
+    "48": "src/assets/icons/icon48.png",
+    "128": "src/assets/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.pinterest.com/*"],
+      "js": ["src/js/content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "src/js/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/assets/*"],
+      "matches": ["*://*.pinterest.com/*"]
+    }
+  ],
+  "author": "TheRealPourya | HexQuant",
+  "homepage_url": "https://github.com/PinKeeper"
+}

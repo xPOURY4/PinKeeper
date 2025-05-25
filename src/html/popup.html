@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PinKeeper: UnOfficial Pinterest Image Vault</title>
+  <link rel="stylesheet" href="../css/popup.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="../assets/icons/icon48.png" alt="PinKeeper Logo">
+      <h1>PinKeeper: UnOfficial Pinterest Image Vault</h1>
+    </div>
+  </header>
+  
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <div class="tab active" data-tab="download">
+      <span class="material-symbols-rounded">download</span>
+      <span class="tab-label">Download</span>
+    </div>
+    <div class="tab" data-tab="history">
+      <span class="material-symbols-rounded">history</span>
+      <span class="tab-label">History</span>
+    </div>
+    <div class="tab" data-tab="settings">
+      <span class="material-symbols-rounded">settings</span>
+      <span class="tab-label">Settings</span>
+    </div>
+    <div class="tab" data-tab="about">
+      <span class="material-symbols-rounded">info</span>
+      <span class="tab-label">About</span>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Download Section -->
+    <div class="section active" id="download-section">
+      <div class="card">
+        <div class="card-title">
+          <span class="material-symbols-rounded">pin_invoke</span>
+          Current Page
+        </div>
+        <div class="counter-label">Available pins: <strong><span id="pin-count">0</span></strong></div>
+        
+        <button id="scan-btn" class="btn btn-secondary">
+          <span class="material-symbols-rounded">search</span>
+          Scan for Pins
+        </button>
+        
+        <button id="load-more-btn" class="btn btn-secondary">
+          <span class="material-symbols-rounded">expand_more</span>
+          Load More Pins
+        </button>
+        
+        <button id="download-btn" class="btn btn-primary">
+          <span class="material-symbols-rounded">download</span>
+          Download Pins
+        </button>
+      </div>
+      
+      <div id="download-status" class="status status-success hidden">
+        <span class="material-symbols-rounded">check_circle</span>
+        <span id="status-message">All pins downloaded successfully!</span>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <span class="material-symbols-rounded">image</span>
+          Preview
+        </div>
+        <div id="preview-container" class="flex-col gap-md">
+          <p id="no-preview-message">Scan for pins to see previews</p>
+          <!-- Preview images will be added here dynamically -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- History Section -->
+    <div class="section" id="history-section">
+      <div class="card">
+        <div class="card-title">
+          <span class="material-symbols-rounded">history</span>
+          Download History
+        </div>
+        <div class="counter-label">Total pins downloaded: <strong><span id="total-downloaded">0</span></strong></div>
+        <div id="history-list" class="flex-col gap-md">
+          <!-- History items will be added here dynamically -->
+          <p id="no-history-message">No download history yet</p>
+        </div>
+        <button id="clear-history-btn" class="btn btn-secondary">
+          <span class="material-symbols-rounded">delete</span>
+          Clear History
+        </button>
+      </div>
+    </div>
+    
+    <!-- Settings Section -->
+    <div class="section" id="settings-section">
+      <div class="card">
+        <div class="card-title">
+          <span class="material-symbols-rounded">settings</span>
+          Download Settings
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="download-folder">Download Folder Name</label>
+          <input type="text" id="download-folder" class="form-control" value="PINTEREST DOWNLOADS">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="max-downloads">Maximum Pins Per Download</label>
+          <select id="max-downloads" class="form-control">
+            <option value="5">5 pins</option>
+            <option value="10" selected>10 pins</option>
+            <option value="20">20 pins</option>
+            <option value="50">50 pins</option>
+            <option value="100">100 pins</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="image-quality">Image Quality</label>
+          <select id="image-quality" class="form-control">
+            <option value="high" selected>High Quality (Original)</option>
+            <option value="medium">Medium Quality (Balanced)</option>
+            <option value="low">Low Quality (Fast)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <div class="flex items-center gap-sm">
+            <input type="checkbox" id="skip-existing" checked>
+            <label for="skip-existing">Skip previously downloaded pins</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="flex items-center gap-sm">
+            <input type="checkbox" id="notify-complete" checked>
+            <label for="notify-complete">Show notification when download completes</label>
+          </div>
+        </div>
+        
+        <button id="save-settings-btn" class="btn btn-primary">
+          <span class="material-symbols-rounded">save</span>
+          Save Settings
+        </button>
+      </div>
+    </div>
+    
+    <!-- About Section -->
+    <div class="section" id="about-section">
+      <div class="card">
+        <div class="about-logo text-center">
+          <img src="../assets/icons/icon128.png" alt="PinKeeper">
+          <h2>PinKeeper: UnOfficial Pinterest Image Vault</h2>
+          <p class="version-info">Version 1.0.0</p>
+        </div>
+        
+        <p class="mb-md text-center" style="color: rgb(23, 38, 39);">
+          Download and organize high-quality Pinterest images in your personal vault. This is an UnOfficial tool to save pins from boards, searches, and profiles directly to your computer.
+        </p>
+        
+        <div class="developer-info">
+          <div class="card-title">
+            <span class="material-symbols-rounded">person</span>
+            Developer
+          </div>
+          <p class="developer-name"><strong>TheRealPourya | HexQuant</strong></p>
+          
+          <div class="social-links-container">
+            <div class="social-links-row">
+              <a href="https://github.com/xPOURY4" target="_blank" class="social-link-inline">
+                <span class="material-symbols-rounded">code</span>
+                <span>GitHub: xPOURY4</span>
+              </a>
+              
+              <a href="https://x.com/TheRealPourya" target="_blank" class="social-link-inline">
+                <span class="material-symbols-rounded">alternate_email</span>
+                <span>X: TheRealPourya</span>
+              </a>
+            </div>
+            <div class="social-links-row">
+              <a href="https://t.me/HexQuantHub" target="_blank" class="social-link-inline">
+                <span class="material-symbols-rounded">send</span>
+                <span>Telegram: HexQuantHub</span>
+              </a>
+              
+              <a href="https://hexquant.xyz" target="_blank" class="social-link-inline">
+                <span class="material-symbols-rounded">language</span>
+                <span>Website: hexquant.xyz</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <span class="material-symbols-rounded">description</span>
+          Features
+        </div>
+        <ul class="feature-list mb-md">
+          <li>Download multiple Pinterest pins in one click</li>
+          <li>Get high-quality original images</li>
+          <li>Works on boards, profiles and search results</li>
+          <li>Filter out ads and promotional content</li>
+          <li>Organize downloads in custom folders</li>
+          <li>Track download history</li>
+          <li>UnOfficial tool - not affiliated with Pinterest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>PinKeeper v1.0.0 &copy; 2025 | UnOfficial Pinterest Image Vault | Made by <strong>TheRealPourya</strong></p>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="../js/popup.js"></script>
+</body>
+</html> 
